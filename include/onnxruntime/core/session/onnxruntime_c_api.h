@@ -61,6 +61,8 @@ extern "C" {
 #define _Check_return_
 #define _Outptr_result_maybenull_
 #define _In_reads_(X)
+#define _Inout_updates_(X)
+#define _Out_writes_(X)
 #define _Inout_updates_all_(X)
 #define _Out_writes_bytes_all_(X)
 #define _Out_writes_all_(X)
@@ -406,7 +408,8 @@ typedef struct OrtCUDAProviderOptions {
         user_compute_stream{},
         default_memory_arena_cfg{},
         tunable_op_enable{false},
-        tunable_op_tuning_enable{false} {}
+        tunable_op_tuning_enable{false},
+        tunable_op_max_tuning_duration_ms{} {}
 #endif
 
   /** \brief CUDA device Id
@@ -469,6 +472,11 @@ typedef struct OrtCUDAProviderOptions {
    */
   int tunable_op_tuning_enable;
 
+  /** \brief Max tuning duration time limit for each instance of TunableOp.
+   *   Defaults to 0 to disable the limit.
+   */
+  int tunable_op_max_tuning_duration_ms;
+
 } OrtCUDAProviderOptions;
 
 /** \brief ROCM Provider Options
@@ -487,7 +495,8 @@ typedef struct OrtROCMProviderOptions {
         user_compute_stream{},
         default_memory_arena_cfg{},
         tunable_op_enable{false},
-        tunable_op_tuning_enable{false} {}
+        tunable_op_tuning_enable{false},
+        tunable_op_max_tuning_duration_ms{} {}
 #endif
 
   /** \brief ROCM device Id
@@ -548,6 +557,11 @@ typedef struct OrtROCMProviderOptions {
    *   This option can be overriden by environment variable ORT_ROCM_TUNABLE_OP_TUNING_ENABLE.
    */
   int tunable_op_tuning_enable;
+
+  /** \brief Max tuning duration time limit for each instance of TunableOp.
+   *   Defaults to 0 to disable the limit.
+   */
+  int tunable_op_max_tuning_duration_ms;
 
 } OrtROCMProviderOptions;
 
