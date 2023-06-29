@@ -525,12 +525,11 @@ else()
 	if(NOT APPLE)
           set(mlas_platform_srcs
             ${mlas_platform_srcs}
-            ${MLAS_SRC_DIR}/qgemm_kernel_amx.cpp
-	    ${MLAS_SRC_DIR}/amx_common.h
-            ${MLAS_SRC_DIR}/x86_64/QgemmU8S8KernelAmx.S
 	    ${MLAS_SRC_DIR}/x86_64/QgemmU8S8KernelAmxCommon.S
+            ${MLAS_SRC_DIR}/qgemm_kernel_amx.cpp
+            ${MLAS_SRC_DIR}/x86_64/QgemmU8S8KernelAmx.S
             )
-          set_source_files_properties(${MLAS_SRC_DIR}/qgemm_kernel_amx.cpp PROPERTIES COMPILE_FLAGS "-masm=intel -mavx2 -mavx512bw -mavx512dq -mavx512vl -mavx512f")
+          set_source_files_properties(${MLAS_SRC_DIR}/qgemm_kernel_amx.cpp PROPERTIES COMPILE_FLAGS "-mavx2 -mavx512bw -mavx512dq -mavx512vl -mavx512f")
           set_source_files_properties(${MLAS_SRC_DIR}/x86_64/QgemmU8S8KernelAmx.S PROPERTIES COMPILE_FLAGS "-mavx2 -mavx512bw -mavx512dq -mavx512vl -mavx512f")
 	endif()
 
